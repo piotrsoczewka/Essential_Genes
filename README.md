@@ -35,11 +35,11 @@ And here a simple example to ilustrate this function:
 
 Before we jump into data analysis and model building, a few more theoretical notes:
 
-    - while bases sequence determines a living organisms features, it also determines DNA physico-chemical properties: G and C interaction between two strands is stronger than A and T interaction. This means that the more C and G a DNA molecule have, the more energy is required for strands separation to overcome interactions between complementary bases.
+ while bases sequence determines a living organisms features, it also determines DNA physico-chemical properties: G and C interaction between two strands is stronger than A and T interaction. This means that the more C and G a DNA molecule have, the more energy is required for strands separation to overcome interactions between complementary bases.
     
-    - organisms usually have several DNA molecules. For example, humans have 46 separate DNA molecules, 23 from each parent. Each of this molecule forms a chromosome - this characteristic X shape structure which is a condensed DNA form. One can find also other DNA molecules in living cells, such as mitochondrial chromosome. Yes, the powerplant of the cell has their own DNA!
+organisms usually have several DNA molecules. For example, humans have 46 separate DNA molecules, 23 from each parent. Each of this molecule forms a chromosome - this characteristic X shape structure which is a condensed DNA form. One can find also other DNA molecules in living cells, such as mitochondrial chromosome. Yes, the powerplant of the cell has their own DNA!
     
-    - only fragments of DNA molecule contains actual instructions. These DNA fragments are called genes. They occupy a particular length of a single DNA strand and differ in bases compositions.
+ only fragments of DNA molecule contains actual instructions. These DNA fragments are called genes. They occupy a particular length of a single DNA strand and differ in bases compositions.
 
 I hope that this short introduction would be helpful to understand what I present in this project.
 
