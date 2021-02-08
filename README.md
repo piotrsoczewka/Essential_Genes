@@ -74,7 +74,7 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 <img src="images/bases_distributions.png" width="700" height="350">
 
-<img src="images/GC_distribution.png" width="500" height="250">
+<img src="images/GC_distribution.png" width="700" height="350">
 
 
 
@@ -82,7 +82,7 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 <img src="images/chi2_gc_length.png" width="375.6" height="50">
 
-<img src="images/essential_vs_nonessential.png" width="1000" height="375">
+<img src="images/essential_vs_nonessential.png" width="1000" height="1137.5">
 
 <img src="images/chi2_essential_nonessential.png" width="425" height="100">
 
