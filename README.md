@@ -50,7 +50,7 @@ Here, I alalyze genomic data from Saccharomyces cerevisiae yeast. This little or
 I analyzed several parameters of yeast genes such as relation between bases contents, gene length and if any particular cluster are formed. Finally, I built two machine learning models for predicting a gene lenght and a predicting if a gene is essential for yeast cell survival or not.
 
 
-## 2) Tools used in the project
+## 2) Techniques and tools used in the project
 
 * Exploratory analysis
 * Regression model
@@ -69,6 +69,7 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 ### Exploratory analysis
 
 <img src="images/all_genes.png" width="636.4" height="150">
+<img src="images/all_genes_screen.png" width="636.4" height="150">
 
 <img src="images/gene_length.png" width="650" height="325">
 
