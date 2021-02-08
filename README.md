@@ -68,7 +68,7 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 ### Exploratory analysis
 
-<img src="images/all_genes.png" width="700" height="350">
+<img src="images/all_genes.png" width="636.4" height="150">
 
 <img src="images/gene_length.png" width="700" height="350">
 
@@ -78,10 +78,12 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 
 
-<img src="images/gene_length.png" width="700" height="350">
+<img src="images/GC_vs_gene_length.png" width="700" height="525">
 
-<img src="images/GC_distribution.png" width="700" height="350">
+<img src="images/chi2_gc_length.png" width="375.6" height="50">
 
-<img src="images/gene_length.png.png" width="700" height="350">
+<img src="images/essential_vs_nonessential.png" width="1400" height="525">
+
+<img src="images/chi2_essential_nonessential.png" width="425" height="100">
 
 
