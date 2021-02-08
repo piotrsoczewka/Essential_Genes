@@ -82,7 +82,7 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 <img src="images/chi2_gc_length.png" width="375.6" height="50">
 
-<img src="images/essential_vs_nonessential.png" width="700" height="525">
+<img src="images/essential_vs_nonessential.png" width="1400" height="525">
 
 <img src="images/chi2_essential_nonessential.png" width="425" height="100">
 
