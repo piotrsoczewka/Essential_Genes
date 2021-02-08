@@ -68,7 +68,7 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 ### Exploratory analysis
 
-<img src="images/all_genes.png" width="636.4" height="153.2">
+<img src="images/all_genes.png" width="650" height="156.47">
 
 <img src="images/gene_length.png" width="650" height="325">
 
