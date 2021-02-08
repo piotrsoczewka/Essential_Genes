@@ -70,7 +70,7 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 <img src="images/all_genes.png" width="636.4" height="150">
 
-<img src="images/gene_length.png" width="600" height="300">
+<img src="images/gene_length.png" width="600" height="325">
 
 <img src="images/bases_distributions.png" width="700" height="350">
 
