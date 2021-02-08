@@ -47,14 +47,25 @@ I hope that this short introduction would be helpful to understand what I presen
 
 Here, I alalyze genomic data from Saccharomyces cerevisiae yeast. This little organism is not only famous for its achievements in bread and beer making, but also in biological sciences where it serves as a model organism. It was the first eukaryotic organisms with known DNA sequence. Yeast is well characterised and much is known about its genetic. Moreover, I carried out my PhD research using yeast, therefore it was a natural choice of an organism for this project.
 
-I analyzed several parameters of yeast genes such as relation between bases contents, gene length and if any particular cluster are formed. Finally, I built two machine learning models: a regression model for predicting a gene lenght and a classification model for predicting if a gene is essential for yeast or not. Both models perform very poorly though...
+I analyzed several parameters of yeast genes such as relation between bases contents, gene length and if any particular cluster are formed. Finally, I built two machine learning models for predicting a gene lenght and a predicting if a gene is essential for yeast cell survival or not.
 
 
 ## 2) Tools used in the project
 
+* Exploratory analysis
+* Regression model
+* Classification model
 * Python and its libriaries: scikit-learn, biopython, pandas, numpy, matplotlib, seaborn, scipy
 * Statistics: chi-squared test
 
 ## 3) Data colletion
 
 Data origins from https://www.yeastgenome.org/. The main data file (orf_genomic.fasta) contains all yeast genes, together with their sequences and some basic information about them. Also, I used 2 other data files (essential_genes.txt, non_essential_genes.txt) that tells us which genes are essential for yeast cells survival, and which are not.
+
+## 4) Results
+
+Below, I present some of the results of the project. Check out jupiter notebook files for the full story.
+
+### Exploratory analysis
+
+<img src="images/Yearly_Lotto_trends_1996-2020.png" width="700" height="350">
