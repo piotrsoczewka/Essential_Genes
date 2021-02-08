@@ -39,19 +39,20 @@ Before we jump into data analysis and model building, a few more theoretical not
     
 * organisms  have several DNA molecules in each cell. For example, humans have 46 separate DNA molecules, 23 from each parent. Each of this molecule forms a chromosome - this characteristic X shape structure which is a condensed DNA form. One can also find other DNA molecules in living cells, such as mitochondrial chromosome. Yes, the powerplant of the cell has their own DNA!
     
-* instructions encoded in DNA are not located on the whole DNA molecule but in fragments called genes. The analogy here could be a file saved on a hard-drive - like a file takes only some of the available space on a hardrive, a gene takes only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length.
+* instructions encoded in DNA are not located on the whole DNA molecule but in fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand.
 
 I hope that this short introduction would be helpful to understand what I present in this project.
 
-## 2) Project objectives
+## 2) What was done
 
-Analyzed genomic data will origin from 
+Here, I alalyze genomic data from Saccharomyces cerevisiae yeast. This little organism is not only famous for its achievements in bread and beer making, but also in biological sciences where it serves as a model organism. It was the first eukaryotic organisms with known DNA sequence. Yeast is well characterised and much is known about its genetic. Moreover, I carried out my PhD research using yeast, therefore it was a natural choice of an organism for this project.
+
+The analyzed data was downloaded from https://www.yeastgenome.org/. The main data file contains all yeast genes, together with their sequences and some basic information about them. Also, I used 2 other data files that tells us which genes are essential for yeast cells survival, and which are not. I combined these data and analyze several parameters such as relation between bases contents, gene length and if any genes form a particular cluster. Finally, I try to build two machine learning models: a regression model for predicting a gene lenght and a classification model for predicting if a gene is essential for yeast or not. Both models perform very poorly though...
 
 
 ## 2) Tools used in the project
-* Python
-* Pandas
-* Seaborn
+* Python and its libriaries: scikit-learn, bio, pandas, numpy, matplotlib, seaborn
+
 * Statistics (significance testing, pingouin and scikit_posthocs libraries)
 
 ## 3) Data colletion
