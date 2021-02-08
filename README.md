@@ -68,4 +68,20 @@ Below, I present some of the results of the project. Check out jupiter notebook 
 
 ### Exploratory analysis
 
-<img src="images/Yearly_Lotto_trends_1996-2020.png" width="700" height="350">
+<img src="images/all_genes.png" width="700" height="350">
+
+<img src="images/gene_length.png" width="700" height="350">
+
+<img src="images/bases_distributions.png" width="700" height="350">
+
+<img src="images/GC_distribution.png" width="700" height="350">
+
+
+
+<img src="images/gene_length.png" width="700" height="350">
+
+<img src="images/GC_distribution.png" width="700" height="350">
+
+<img src="images/gene_length.png.png" width="700" height="350">
+
+
