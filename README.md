@@ -188,3 +188,7 @@ As a class to be predicted I selected whether or not a gene is essential. A gene
 General pattern visible on the scatterplots is similar for essential and non-essential genes. However, while percentage shares of genes in each quarter for non-essential genes are comparable with values for all the genes in the previous scatterplot (differences around 1 percentage point), higher differences are observed for essential genes, especially for the quarter where genes with GC content below the median and length above the median. 36.15% of all essential genes are localised in this quarter, while for all investigated genes it was 28.44%. One should expect higher deviations in smaller datasets, but it still looks like a high enrichement. I analyse observed values with chi-squared test to see if differences in genes distributions among quarters are statistically significant.
 
 <img src="images/chi2_essential_nonessential.png" width="743,75" height="175">
+
+Very lov p-value (4,4 * 10<sup>-7</sup>) indicates that differences that distributions of essential and non-essential genes among quarters are significantly different.
+
+Ok, let's start classification. I'd like to use gene lenght, bases content and chromosomal localisation to
