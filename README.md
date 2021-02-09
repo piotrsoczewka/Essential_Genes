@@ -173,11 +173,18 @@ The GridSearchCV() function, in each cross_validate() split, always selected 3 a
 
 <img src="images/regression_evaluation.png" width="400" height="800">
 
-<img src="images/chi2_essential_nonessential.png" width="425" height="100">
+The chart shows that 3 indeed seems to be optimal degree - not only R2 score is the highers, the erros for other metrics are the lowest.
 
+I played a bit with higher degrees, however above the 4th model become very unstable (huge standard deviations) and difference between 1sth and 4th degrees are not visible on the chart, so I leave charts up to the 4th degree only.
+
+The fact that models performance changes depending on the polynomial degree means that gene lenghts predictions are not completely random, yet poor evaluation metrics indicate no practical application for this model.
+
+### Classification model
+
+As a class to be predicted I selected whether or not a gene is essential. A gene is essential, when yeast is not viable at all when the gene is removed. Around 20% of yeast genes are essential. I labeled genes as essential or not in our data frame using data from essential_genes.txt and non_essential_genes.txt files. Before starting building a classification model, I play a bit with data and want to see how essential genes are distributed. I adapt a previously used scatter plot to show what is GC content - gene length relation among essential and non-essential genes.
 
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
-<img src="images/chi2_essential_nonessential.png" width="425" height="100">
+<img src="images/chi2_essential_nonessential.png" width="637.5" height="150">
 
 
