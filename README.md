@@ -111,6 +111,55 @@ I try to build a regression model for predicting a gene length base on its bases
 
 - several metrics will be used: ean of R2 scores, root mean square errors and  median absolute errors and their standard deviations. This will give us more information about model performance.
 
+Here is code for the model building:
+
+    # Preparing y and X datasets.
+    y = all_genes_df['gene_length[bp]']
+    X = all_genes_df.drop(['gene_length[bp]', 'gene_ID', 'category', 'GC_content[%]'], axis=1)
+    
+    # Defining an estimator and list of degrees for checking.
+    poly = PolynomialFeatures()
+    lin_reg = LinearRegression()
+    estimator = make_pipeline(poly, lin_reg)
+
+    # Selecting parameters for model tuning.
+    param = {'polynomialfeatures__degree' : [1,2,3,4]}
+
+    # Creating best_degrees list for storing best degrees in each cross_validate split.
+    best_degrees = []
+
+    # Preparing metrics for model evaluation on test sets.
+    scoring = {'r2' : make_scorer(r2_score), \
+               'mse' : make_scorer(mean_squared_error), \
+               'mae' : make_scorer(median_absolute_error)}
+
+    # Performing nested cross-validation. R2 score for model tuning and metrics in scoring for model evaluation.
+    cv_inner = 10
+    cv_outer = 10
+
+    best_model = GridSearchCV(estimator, param, cv=cv_inner, scoring='r2')
+    scores = cross_validate(best_model, X, y, cv=cv_outer, scoring=scoring, return_estimator=True)
+
+    # Calculating means and standard deviations of each metric scores from splits done by cross_validate().
+    r2_mean = round((scores['test_r2']).mean(), 2)
+    r2_std = round((scores['test_r2']).std(), 2)
+
+    rmse_mean = round((scores['test_mse']**0.5).mean(), 2) # Extracting roots from mean_squared_errors.
+    rmse_std = round((scores['test_mse']**0.5).std(), 2)
+
+    mae_mean = round((scores['test_mae']).mean(), 2)
+    mae_std = round((scores['test_mae']).std(), 2)
+
+    # Extracting best_params for each cross_validate() (outer loop) split.
+    for i in range(cv_outer):
+        best_degrees.append(scores['estimator'][i].best_params_['polynomialfeatures__degree'])
+
+
+    # Results of the model evaluation
+    print('Mean R2 score =', r2_mean, "+/-", r2_std)
+    print('Mean root mean square error =', rmse_mean, "+/-", rmse_std)
+    print('Mean median absolute error =', mae_mean, "+/-", mae_std)
+    print('Selected optimal degrees:', best_degrees)
 
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
