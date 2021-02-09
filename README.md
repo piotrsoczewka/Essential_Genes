@@ -97,6 +97,21 @@ The differences in genes distribution in each quarter are rather low and differ 
 
 A very low p-value indicates that observed differences in contents in each quarter are statisticly significant. One can tell that that the longer a gene is, an expected GC content tend to be lower than the median, and vice versa - shorter genes tend to have higher GC content.
 
+### Regression model
+
+I try to build a regression model for predicting a gene length base on its bases contents and chromosom at which is localised. Here is a roadmap for building my model:
+
+- polynomial regression model - good to check what degree of a polynomial will yield the best results, linear model may not be optimal.
+
+- nested cross-validation as a general good practice in model building. Inner loop done by GridSearchCV() function select optimal parameter (in our case a degree of a polynomial) for the model. Outer loop done by cross_validate() function results in more accurate model evaluation - testing model on several test sets prevents us from overestimating (or underestimating) model performance. To make sure that testing sets are not participating in model training, GridSearchCV() is used as an estimaor argument in cross_validate().
+
+- R2 score will be used in GridSearchCV() for selecting optimal degree for the model.
+
+- I want to know what is the best degree selected by GridSearchCV() during each split done by cross_validate() to see if there is a 'universal' optimal degree for various training sets. For that, I extract the optimal degree for each split by using .best_params_. Results will be stored in best_degrees list.
+
+- several metrics will be used: ean of R2 scores, root mean square errors and  median absolute errors and their standard deviations. This will give us more information about model performance.
+
+
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
 <img src="images/chi2_essential_nonessential.png" width="425" height="100">
