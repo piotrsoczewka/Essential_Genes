@@ -67,8 +67,11 @@ Data origins from https://www.yeastgenome.org/. The main data file (orf_genomic.
 Below, I present some of the results of the project. Check out jupiter notebook files for the full story.
 
 ### Exploratory analysis
+Data will be imported from the orf_genomic.fasta file using SeqIO interface from Bio library. Data contains all yeast genes IDs, their sequences and at which chromosomes they are localised. I aim to create a dataframe containing: gene ID, gene length, chromosom and content of each bases. Also, I count summed contents of G and C bases - this parameter is interesting in genetics, because the higher summed GC content, the more energy is required to separate DNA strands.
 
 <img src="images/all_genes.png" width="650" height="156.47">
+
+The data frame looks fine. Let's do some histogram to look for distribution of some of the genes features.
 
 <img src="images/gene_length.png" width="650" height="325">
 
