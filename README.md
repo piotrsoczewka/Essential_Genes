@@ -163,6 +163,8 @@ Here is the code for the model building and its evaluation:
     
 Model performance was pathetic though...
 
+<img src="images/regression_performance.png" width="650" height="116.44">
+
 Mean R2 score = 0.12 +/- 0.02
 Mean root mean square error = 1070.51 +/- 78.51
 Mean median absolute error = 568.66 +/- 23.33
