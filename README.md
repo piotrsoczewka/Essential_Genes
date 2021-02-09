@@ -185,4 +185,4 @@ As a class to be predicted I selected whether or not a gene is essential. A gene
 
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
-<img src="images/chi2_essential_nonessential.png" width="637.5" height="150">
+<img src="images/chi2_essential_nonessential.png" width="743,75" height="175">
