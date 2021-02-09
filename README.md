@@ -171,7 +171,7 @@ The model evaluation is not encouraging, but it is still interesting that the R2
 
 The GridSearchCV() function, in each cross_validate() split, always selected 3 as the optimal degree. I still want to see how model performs for other degrees. I create a loop in which a desired number of degrees will be tested and later metrics (R2 score, root mean square error, median absolute error)  will be shown for each degree. A single cross-validation will be performed since we want metrics for each degree. Because data sets are splited the same way during each round of cross-validation, degrees will be tested on the same datasets. Below I present results of evaluations of model with various polynomial degrees.
 
-<img src="images/regression_evaluation.png" width="500" height="1000">
+<img src="images/regression_evaluation.png" width="450" height="900">
 
 <img src="images/chi2_essential_nonessential.png" width="425" height="100">
 
