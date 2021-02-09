@@ -75,11 +75,17 @@ The data frame looks fine. Let's do some histogram to look for distribution of s
 
 <img src="images/gene_length.png" width="650" height="325">
 
+Gene lengths ranges up to approx. 15000 base pairs, however only few of them are longer than 5000. Most of them have length of around 500-2000 base pairs.
+
 <img src="images/bases_distributions.png" width="650" height="325">
+
+The charts shows that adenine content is the highest in yeast genes (most between 25% and 40%). The lowest is guanine (most between 15%-25%).
 
 <img src="images/GC_distribution.png" width="650" height="325">
 
+GC content for most of the genes ranges from 30 to 50%, significantly peaking around 40%. The distribution is slightly skewed to the higher values.
 
+Basic histograms looks fine. In this section, I'd like also to take a look if there is any correlation between GC content and gene length. I create a scatter plot showing this relation. I also mark medians for both features and count what percentage of all genes are located in each quarter, to see if some are overrepresented.
 
 <img src="images/GC_vs_gene_length.png" width="650" height="487.5">
 
