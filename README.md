@@ -83,13 +83,19 @@ The charts shows that adenine content is the highest in yeast genes (most betwee
 
 <img src="images/GC_distribution.png" width="650" height="325">
 
-GC content for most of the genes ranges from 30 to 50%, significantly peaking around 40%. The distribution is slightly skewed to the higher values.
+GC content for most of the genes ranges from 30% to 50%, significantly peaking around 40%. The distribution is slightly skewed to the higher values.
 
-Basic histograms looks fine. In this section, I'd like also to take a look if there is any correlation between GC content and gene length. I create a scatter plot showing this relation. I also mark medians for both features and count what percentage of all genes are located in each quarter, to see if some are overrepresented.
+Basic histograms look fine. In this section, I'd like also to take a look if there is any correlation between GC content and gene length. I create a scatter plot showing this relation. I also mark medians for both features and count what percentage of all genes is located in each quarter to see if some are overrepresented.
 
 <img src="images/GC_vs_gene_length.png" width="650" height="487.5">
 
+While there is no clear corelation between GC content and gene length and most of the genes are localized around the intersection point of both medians, an interesting phenomenon is visiible - longer genes (above 2000 bp) tend to have GC content lower than the median. There are not genes longer than 7000 bp with GC content above the median. Reverse tendency is observed for short genes - genes below gene length median tend to have higher GC content. Perhapse, it will be possible to create a ML model predicting GC content based on gene lenth (or vice versa), however the lack of obvious correlation implies that this kind of a model will rather not be very useful.
+
+The differences in genes distribution in each quarter are rather low and differ for around 3.5 percentage points from expected 25%. However, for a dataset of this size, even such a low difference may indicate some phenomenon which is not explained by randomness. To check if observed differences could have some statistical significances, I perform a chi-squared test for one  using stats module of scipy library.
+
 <img src="images/chi2_gc_length.png" width="650" height="86.46">
+
+A very low p-value indicates that observed differences in contents in each quarter are statisticly significant. One can tell that that the longer a gene is, an expected GC content tend to be lower than the median, and vice versa - shorter genes tend to have higher GC content.
 
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
