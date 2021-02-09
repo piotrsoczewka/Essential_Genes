@@ -111,7 +111,7 @@ I try to build a regression model for predicting a gene length base on its bases
 
 - several metrics will be used: ean of R2 scores, root mean square errors and  median absolute errors and their standard deviations. This will give us more information about model performance.
 
-Here is code for the model building:
+Here is the code for the model building and its evaluation:
 
     # Preparing y and X datasets.
     y = all_genes_df['gene_length[bp]']
@@ -160,6 +160,13 @@ Here is code for the model building:
     print('Mean root mean square error =', rmse_mean, "+/-", rmse_std)
     print('Mean median absolute error =', mae_mean, "+/-", mae_std)
     print('Selected optimal degrees:', best_degrees)
+    
+Model performance was pathetic though...
+
+Mean R2 score = 0.12 +/- 0.02
+Mean root mean square error = 1070.51 +/- 78.51
+Mean median absolute error = 568.66 +/- 23.33
+Selected optimal degrees: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
