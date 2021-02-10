@@ -191,4 +191,83 @@ General pattern visible on the scatterplots is similar for essential and non-ess
 
 Very lov p-value (4,4 * 10<sup>-7</sup>) indicates that differences that distributions of essential and non-essential genes among quarters are significantly different.
 
-Ok, let's start classification. I'd like to use gene lenght, bases content and chromosomal localisation to
+Ok, let's start classification. I plan to predict whether a gene is essential or not based on its length, bases content and chromosome on which is localised. Here is the roadmap for the model: 
+
+- essential genes are not a separate cluster, therefore distinguishing them from non-essential genes by support vector machine or logistic regression seems a poor choice. However, as we see in the previos charts, there are areas in which essential genes appear more often. This gives some hopes for k-nearest neighbors algorithm, which classify records based on neighboring samples. This algorithm will be used then.
+
+- I would like to see how model performs for various k-neighbors. For that, I create outer loop which will test every indicated k-neighbor.
+
+- optmal distance metric (euclidean or manhattan) as well as model evaluation will be done by nested cross-validation. GridSearchCV (distance metric parameter tuning) and cross_validate (model evaluation) functions will be used for nested cross-validation. I would like also to see how many times a particurlar distance metric will be choosen during each round of GridSearch cross-validation.
+
+- for distance metric selection, recall will be used as evaluation metric. Recall (sensitivity) tells how good is the model in detectng positive class (in our case - essential genes) in a dataset, which is crucial feature in this task - we want to detects as many essential genes as possible. Therefore, recall seems the most important evaluation metric is this aspect.
+
+- for evaluation on the test set, I will again use recall. However, a high recall value could be caused not by model ability to recognize essential genes, but by a tendency to label as many genes as possible as essential. This will result in many false positives, because many non-essential genes will be labeles as essential. To control if model is not biased in this manner, I would like to see in model evaluation also recall of a negative class (or specificity), which will tell us how good is the model in finding negative classes.
+
+- since there is no default metric allowing us to see  recall of a negative class, I create the recall_neg_class function which will extract required data for calculating recall of a negative class from confusion matrix.
+
+And here is the code:
+
+    # Preparing y and X datasets.
+    mapper = {'yes' : True, 'no' : False} # preparing mapper for assigning boolean data type instead of yes/no in 'is_essental' column
+    y = all_genes_df['is_essential'].map(mapper)
+    X = all_genes_df.drop(['is_essential', 'gene_ID', 'category', 'GC_content[%]'], axis=1)
+    
+    # Defining recall_neg_class function.
+    # Function is based on a solution proposed by sedeh (https://stackoverflow.com/questions/33275461/specificity-in-scikit-learn).
+    def recall_neg_class(y_true, y_pred):
+        tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+        value = tn / (tn + fp)
+        return value
+# Defining k-neighbors for model tuning.
+neighbors = list(range(1,10,2))
+
+# Creating lists storing metrics scores and selected distance metric during each GridSearchCV round.
+recall_mean_list = []
+recall_std_list = []
+
+recall_neg_means_list = []
+recall_neg_std_list = []
+
+euclidean_distance = []
+manhattan_distance = []
+
+
+# Outer loop iterating over choosen k-neighbors.
+for k in neighbors:
+
+    clf = KNeighborsClassifier(n_neighbors = k)
+
+    # Selecting parameters for model tuning.
+    param = {'metric' : ['euclidean', 'manhattan']}
+    best_param = []
+    
+    # Preparing scoring metrics for model evaluation.
+    scoring = {'recall' : make_scorer(recall_score), \
+               'recall_neg': make_scorer(recall_neg_class)}
+
+    # Performing nested cross-validation, recall score for model tuning, recall and recall_neg for (scroring dictionary) for model evaluation.
+    cv_inner = 10
+    cv_outer = 10
+
+    best_model = GridSearchCV(clf, param, cv=cv_inner, scoring='recall')
+    scores = cross_validate(best_model, X, y, cv=cv_outer, scoring=scoring, return_estimator=True)
+
+    # Calculating means and standard deviations of each metric scores from splits done by cross_validate().
+    recall_mean = round((scores['test_recall']).mean(), 3)
+    recall_mean_list.append(recall_mean)
+    
+    recall_std = round((scores['test_recall']).std(), 3)
+    recall_std_list.append(recall_std)
+
+    recall_neg_mean = round((scores['test_recall_neg']).mean(), 3)
+    recall_neg_means_list.append(recall_neg_mean)
+    
+    recall_neg_std = round((scores['test_recall_neg']).std(), 3)
+    recall_neg_std_list.append(recall_neg_std)
+
+    # Extracting information how many times each metric was used during each GridSearchCV round.
+    for i in range(cv_outer):
+        best_param.append(scores['estimator'][i].best_params_['metric'])
+        
+    euclidean_distance.append(best_param.count('euclidean'))
+    manhattan_distance.append(best_param.count('manhattan'))
