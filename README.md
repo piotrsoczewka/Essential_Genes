@@ -5,8 +5,7 @@ Welcome to my project, in which I am going to analyse some yeast genomic data an
 Every living organism contains instructions allowing development and functioning of an individual. These instructions are encoded in DNA - a long, chain-like molecule consisting of two strands which forms a famous double helix structure. Each strand is a string of four different elements called bases. They are adenine (A), thymine (T), cytosine (C) and guanine (G) and order of these bases determines information about a living organism. Both strands in DNA molecule are complementary - a each base from one strand interacts with a respective base from the other strand. A interacts with T, and C interacts with G, and vice versa. I think that the below should be helpful to understand it.
 
 <img src="images/dna_complement.png" width="300" height="404.68">
-Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en
-
+Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en.
 
 To undestand complementarity between DNA strands, you may also take a look on the syntax of my create_complementary_strand function, which creates a complementary DNA strand to a given DNA strand.
 
@@ -47,8 +46,7 @@ Before we jump into data analysis and model building, a few more theoretical not
 * instructions encoded in DNA are not located on the whole DNA molecule but in fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand. See the picture below which may help you to visualise.
 
 <img src="images/dna_gene.jpg" width="377.56" height="350">
-Credit: Thomas Splettstoesser. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/deed.en
-
+Credit: Thomas Splettstoesser. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/deed.en.
 
 I hope that this short introduction would be helpful to understand what I present in this project.
 
