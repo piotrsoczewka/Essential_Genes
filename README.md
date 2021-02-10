@@ -2,11 +2,13 @@
 
 Welcome to my project, in which I am going to analyse some yeast genomic data and try to build some machine learning models to predicts some of the genes' features. However, because it could be browsered not only by biologists, but also by people without relevant background, I provide below a short explanation of genetics fundamentals. Many simplifications have been done, yet I hope the basics of genetics relevant for this project are adequately explained. So, without further ado, let's start.
 
-Every living organism contains instructions allowing development and functioning of an individual. These instructions are encoded in DNA - a long, chain-like molecule consisting of two strands which forms a famous double helix structure. Each strand is a string of four different elements called bases. They are adenine (A), thymine (T), cytosine (C) and guanine (G) and order of these bases determines information about a living organism. Both strands in DNA molecule are complementary - a each base from one strand interacts with a respective base from the other strand. A interacts with T, and C interacts with G, and vice versa. I think that the below picuter explains it enough. And if you are a programmer, to undestand it better you may also take a look on the syntax of my create_complementary_strand function (below the image), which creates a complementary DNA strand to a given DNA strand.
+Every living organism contains instructions allowing development and functioning of an individual. These instructions are encoded in DNA - a long, chain-like molecule consisting of two strands which forms a famous double helix structure. Each strand is a string of four different elements called bases. They are adenine (A), thymine (T), cytosine (C) and guanine (G) and order of these bases determines information about a living organism. Both strands in DNA molecule are complementary - a each base from one strand interacts with a respective base from the other strand. A interacts with T, and C interacts with G, and vice versa. I think that the below should be helpful to understand it.
 
 <img src="images/dna_complement.png" width="300" height="404.68">
 Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en
 
+
+To undestand complementarity between DNA strands, you may also take a look on the syntax of my create_complementary_strand function, which creates a complementary DNA strand to a given DNA strand.
 
 ```python
 def create_complementary_strand(your_strand):
@@ -46,6 +48,7 @@ Before we jump into data analysis and model building, a few more theoretical not
 
 <img src="images/dna_gene.jpg" width="377.56" height="350">
 Credit: Thomas Splettstoesser. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/deed.en
+
 
 I hope that this short introduction would be helpful to understand what I present in this project.
 
