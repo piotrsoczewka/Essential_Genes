@@ -207,6 +207,7 @@ Ok, let's start classification. I plan to predict whether a gene is essential or
 
 And here is the code:
 
+    '''python
     # Preparing y and X datasets.
     mapper = {'yes' : True, 'no' : False} # preparing mapper for assigning boolean data type instead of yes/no in 'is_essental' column
     y = all_genes_df['is_essential'].map(mapper)
@@ -272,3 +273,4 @@ And here is the code:
 
         euclidean_distance.append(best_param.count('euclidean'))
         manhattan_distance.append(best_param.count('manhattan'))
+        '''
