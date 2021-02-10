@@ -5,7 +5,7 @@ Welcome to my project, in which I am going to analyse some yeast genomic data an
 Every living organism contains instructions allowing development and functioning of an individual. These instructions are encoded in DNA - a long, chain-like molecule consisting of two strands which forms a famous double helix structure. Each strand is a string of four different elements called bases. They are adenine (A), thymine (T), cytosine (C) and guanine (G) and order of these bases determines information about a living organism. Both strands in DNA molecule are complementary - a each base from one strand interacts with a respective base from the other strand. A interacts with T, and C interacts with G, and vice versa. I think that the below should be helpful to understand it.
 
 <img src="images/dna_complement.png" width="300" height="404.68">
-<p style="font-size:5px">Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en</p>
+Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en
 
 To undestand complementarity between DNA strands, you may also take a look on the syntax of my create_complementary_strand function, which creates a complementary DNA strand to a given DNA strand.
 
