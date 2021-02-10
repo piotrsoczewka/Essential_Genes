@@ -4,32 +4,33 @@ Welcome to my project, in which I am going to analyse some yeast genomic data an
 
 Every living organism contains instructions allowing development and functioning of an individual. These instructions are encoded in DNA - a long, chain-like molecule consisting of two strands which forms a famous double helix structure. Each strand is a string of four different elements called bases. They are adenine (A), thymine (T), cytosine (C) and guanine (G) and order of these bases determines information about a living organism. Both strands in DNA molecule are complementary - a each base from one strand interacts with a respective base from the other strand. A interacts with T, and C interacts with G, and vice versa. I think that the below image explains it enough, but to have a full picture, I wrote also the create_complementary_strand function converting a DNA strand into its complementing strand. By playing a bit with it, I think the idea behind creating complementary DNA strands should be clear.
 
+```python
+def create_complementary_strand(your_strand):
+    '''Creates a complementary DNA strand to given DNA strand.'''
 
-    def create_complementary_strand(your_strand):
-        '''Creates a complementary DNA strand to given DNA strand.'''
+    # Making sure the given sequence format will be suitable for conversion.
+    your_strand = your_strand.replace(' ', '').upper()
 
-        # Making sure the given sequence format will be suitable for conversion.
-        your_strand = your_strand.replace(' ', '').upper()
+    complementation_pattern = {
+        'A' : 'T',
+        'T' : 'A',
+        'C' : 'G',
+        'G' : 'C'
+    }
 
-        complementation_pattern = {
-            'A' : 'T',
-            'T' : 'A',
-            'C' : 'G',
-            'G' : 'C'
-        }
+    complementary_strand = ''
 
-        complementary_strand = ''
+    for base in your_strand:
+        try:
+            complementary_strand = (complementary_strand + complementation_pattern[base])
+        except KeyError:
+            print('Error - an invalid bases was in given in the original DNA strand')
+            print('Can not create a complementary_strand')
+            complementary_strand = False
+            break
 
-        for base in your_strand:
-            try:
-                complementary_strand = (complementary_strand + complementation_pattern[base])
-            except KeyError:
-                print('Error - an invalid bases was in given in the original DNA strand')
-                print('Can not create a complementary_strand')
-                complementary_strand = False
-                break
-
-        return complementary_strand
+    return complementary_strand
+```
    
 And here a simple example to ilustrate this function:
 
@@ -113,53 +114,55 @@ I try to build a regression model for predicting a gene length base on its bases
 
 Here is the code for the model building and its evaluation:
 
-    # Preparing y and X datasets.
-    y = all_genes_df['gene_length[bp]']
-    X = all_genes_df.drop(['gene_length[bp]', 'gene_ID', 'category', 'GC_content[%]'], axis=1)
-    
-    # Defining an estimator and list of degrees for checking.
-    poly = PolynomialFeatures()
-    lin_reg = LinearRegression()
-    estimator = make_pipeline(poly, lin_reg)
+```python
+# Preparing y and X datasets.
+y = all_genes_df['gene_length[bp]']
+X = all_genes_df.drop(['gene_length[bp]', 'gene_ID', 'category', 'GC_content[%]'], axis=1)
 
-    # Selecting parameters for model tuning.
-    param = {'polynomialfeatures__degree' : [1,2,3,4]}
+# Defining an estimator and list of degrees for checking.
+poly = PolynomialFeatures()
+lin_reg = LinearRegression()
+estimator = make_pipeline(poly, lin_reg)
 
-    # Creating best_degrees list for storing best degrees in each cross_validate split.
-    best_degrees = []
+# Selecting parameters for model tuning.
+param = {'polynomialfeatures__degree' : [1,2,3,4]}
 
-    # Preparing metrics for model evaluation on test sets.
-    scoring = {'r2' : make_scorer(r2_score), \
-               'mse' : make_scorer(mean_squared_error), \
-               'mae' : make_scorer(median_absolute_error)}
+# Creating best_degrees list for storing best degrees in each cross_validate split.
+best_degrees = []
 
-    # Performing nested cross-validation. R2 score for model tuning and metrics in scoring for model evaluation.
-    cv_inner = 10
-    cv_outer = 10
+# Preparing metrics for model evaluation on test sets.
+scoring = {'r2' : make_scorer(r2_score), \
+           'mse' : make_scorer(mean_squared_error), \
+           'mae' : make_scorer(median_absolute_error)}
 
-    best_model = GridSearchCV(estimator, param, cv=cv_inner, scoring='r2')
-    scores = cross_validate(best_model, X, y, cv=cv_outer, scoring=scoring, return_estimator=True)
+# Performing nested cross-validation. R2 score for model tuning and metrics in scoring for model evaluation.
+cv_inner = 10
+cv_outer = 10
 
-    # Calculating means and standard deviations of each metric scores from splits done by cross_validate().
-    r2_mean = round((scores['test_r2']).mean(), 2)
-    r2_std = round((scores['test_r2']).std(), 2)
+best_model = GridSearchCV(estimator, param, cv=cv_inner, scoring='r2')
+scores = cross_validate(best_model, X, y, cv=cv_outer, scoring=scoring, return_estimator=True)
 
-    rmse_mean = round((scores['test_mse']**0.5).mean(), 2) # Extracting roots from mean_squared_errors.
-    rmse_std = round((scores['test_mse']**0.5).std(), 2)
+# Calculating means and standard deviations of each metric scores from splits done by cross_validate().
+r2_mean = round((scores['test_r2']).mean(), 2)
+r2_std = round((scores['test_r2']).std(), 2)
 
-    mae_mean = round((scores['test_mae']).mean(), 2)
-    mae_std = round((scores['test_mae']).std(), 2)
+rmse_mean = round((scores['test_mse']**0.5).mean(), 2) # Extracting roots from mean_squared_errors.
+rmse_std = round((scores['test_mse']**0.5).std(), 2)
 
-    # Extracting best_params for each cross_validate() (outer loop) split.
-    for i in range(cv_outer):
-        best_degrees.append(scores['estimator'][i].best_params_['polynomialfeatures__degree'])
+mae_mean = round((scores['test_mae']).mean(), 2)
+mae_std = round((scores['test_mae']).std(), 2)
+
+# Extracting best_params for each cross_validate() (outer loop) split.
+for i in range(cv_outer):
+    best_degrees.append(scores['estimator'][i].best_params_['polynomialfeatures__degree'])
 
 
-    # Results of the model evaluation
-    print('Mean R2 score =', r2_mean, "+/-", r2_std)
-    print('Mean root mean square error =', rmse_mean, "+/-", rmse_std)
-    print('Mean median absolute error =', mae_mean, "+/-", mae_std)
-    print('Selected optimal degrees:', best_degrees)
+# Results of the model evaluation
+print('Mean R2 score =', r2_mean, "+/-", r2_std)
+print('Mean root mean square error =', rmse_mean, "+/-", rmse_std)
+print('Mean median absolute error =', mae_mean, "+/-", mae_std)
+print('Selected optimal degrees:', best_degrees)
+```
     
 Model performance was pathetic though...
 
