@@ -6,9 +6,7 @@ Every living organism contains instructions allowing development and functioning
 
 <img src="images/dna_complement.png" width="300" height="404.68">
 
-Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en {
-  font-size: 75;
-}
+Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en
 
 To undestand complementarity between DNA strands, you may also take a look on the syntax of my create_complementary_strand function, which creates a complementary DNA strand to a given DNA strand.
 
