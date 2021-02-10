@@ -42,7 +42,7 @@ Before we jump into data analysis and model building, a few more theoretical not
     
 * instructions encoded in DNA are not located on the whole DNA molecule but in fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand. See the picture below which may help you to visualise.
 
-<img src="images/dna_gene.jpg">
+<img src="images/dna_gene.jpg" width="323.6" height="300">
 
 
 I hope that this short introduction would be helpful to understand what I present in this project.
