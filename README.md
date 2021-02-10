@@ -40,7 +40,10 @@ Before we jump into data analysis and model building, a few more theoretical not
     
 * organisms  have several DNA molecules in each cell. For example, humans have 46 separate DNA molecules, 23 from each parent. Each of this molecule forms a chromosome - this characteristic X shape structure which is a condensed DNA form. One can also find other DNA molecules in living cells, such as mitochondrial chromosome. Yes, the powerplant of the cell has their own DNA!
     
-* instructions encoded in DNA are not located on the whole DNA molecule but in fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand.
+* instructions encoded in DNA are not located on the whole DNA molecule but in fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand. See the picture below which may help you to visualise.
+
+<img src="images/dna_gene.jpg">
+
 
 I hope that this short introduction would be helpful to understand what I present in this project.
 
