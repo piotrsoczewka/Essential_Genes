@@ -207,70 +207,70 @@ Ok, let's start classification. I plan to predict whether a gene is essential or
 
 And here is the code:
 
-    '''python
-    # Preparing y and X datasets.
-    mapper = {'yes' : True, 'no' : False} # preparing mapper for assigning boolean data type instead of yes/no in 'is_essental' column
-    y = all_genes_df['is_essential'].map(mapper)
-    X = all_genes_df.drop(['is_essential', 'gene_ID', 'category', 'GC_content[%]'], axis=1)
-    
-    # Defining recall_neg_class function.
-    # Function is based on a solution proposed by sedeh (https://stackoverflow.com/questions/33275461/specificity-in-scikit-learn).
-    def recall_neg_class(y_true, y_pred):
-        tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
-        value = tn / (tn + fp)
-        return value
-        
-    # Defining k-neighbors for model tuning.
-    neighbors = list(range(1,10,2))
+'''Python
+# Preparing y and X datasets.
+mapper = {'yes' : True, 'no' : False} # preparing mapper for assigning boolean data type instead of yes/no in 'is_essental' column
+y = all_genes_df['is_essential'].map(mapper)
+X = all_genes_df.drop(['is_essential', 'gene_ID', 'category', 'GC_content[%]'], axis=1)
 
-    # Creating lists storing metrics scores and selected distance metric during each GridSearchCV round.
-    recall_mean_list = []
-    recall_std_list = []
+# Defining recall_neg_class function.
+# Function is based on a solution proposed by sedeh (https://stackoverflow.com/questions/33275461/specificity-in-scikit-learn).
+def recall_neg_class(y_true, y_pred):
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+    value = tn / (tn + fp)
+    return value
 
-    recall_neg_means_list = []
-    recall_neg_std_list = []
+# Defining k-neighbors for model tuning.
+neighbors = list(range(1,10,2))
 
-    euclidean_distance = []
-    manhattan_distance = []
+# Creating lists storing metrics scores and selected distance metric during each GridSearchCV round.
+recall_mean_list = []
+recall_std_list = []
+
+recall_neg_means_list = []
+recall_neg_std_list = []
+
+euclidean_distance = []
+manhattan_distance = []
 
 
-    # Outer loop iterating over choosen k-neighbors.
-    for k in neighbors:
+# Outer loop iterating over choosen k-neighbors.
+for k in neighbors:
 
-        clf = KNeighborsClassifier(n_neighbors = k)
+    clf = KNeighborsClassifier(n_neighbors = k)
 
-        # Selecting parameters for model tuning.
-        param = {'metric' : ['euclidean', 'manhattan']}
-        best_param = []
+    # Selecting parameters for model tuning.
+    param = {'metric' : ['euclidean', 'manhattan']}
+    best_param = []
 
-        # Preparing scoring metrics for model evaluation.
-        scoring = {'recall' : make_scorer(recall_score), \
-                   'recall_neg': make_scorer(recall_neg_class)}
+    # Preparing scoring metrics for model evaluation.
+    scoring = {'recall' : make_scorer(recall_score), \
+               'recall_neg': make_scorer(recall_neg_class)}
 
-        # Performing nested cross-validation, recall score for model tuning, recall and recall_neg for (scroring dictionary) for model evaluation.
-        cv_inner = 10
-        cv_outer = 10
+    # Performing nested cross-validation, recall score for model tuning, recall and recall_neg for (scroring dictionary) for model evaluation.
+    cv_inner = 10
+    cv_outer = 10
 
-        best_model = GridSearchCV(clf, param, cv=cv_inner, scoring='recall')
-        scores = cross_validate(best_model, X, y, cv=cv_outer, scoring=scoring, return_estimator=True)
+    best_model = GridSearchCV(clf, param, cv=cv_inner, scoring='recall')
+    scores = cross_validate(best_model, X, y, cv=cv_outer, scoring=scoring, return_estimator=True)
 
-        # Calculating means and standard deviations of each metric scores from splits done by cross_validate().
-        recall_mean = round((scores['test_recall']).mean(), 3)
-        recall_mean_list.append(recall_mean)
+    # Calculating means and standard deviations of each metric scores from splits done by cross_validate().
+    recall_mean = round((scores['test_recall']).mean(), 3)
+    recall_mean_list.append(recall_mean)
 
-        recall_std = round((scores['test_recall']).std(), 3)
-        recall_std_list.append(recall_std)
+    recall_std = round((scores['test_recall']).std(), 3)
+    recall_std_list.append(recall_std)
 
-        recall_neg_mean = round((scores['test_recall_neg']).mean(), 3)
-        recall_neg_means_list.append(recall_neg_mean)
+    recall_neg_mean = round((scores['test_recall_neg']).mean(), 3)
+    recall_neg_means_list.append(recall_neg_mean)
 
-        recall_neg_std = round((scores['test_recall_neg']).std(), 3)
-        recall_neg_std_list.append(recall_neg_std)
+    recall_neg_std = round((scores['test_recall_neg']).std(), 3)
+    recall_neg_std_list.append(recall_neg_std)
 
-        # Extracting information how many times each metric was used during each GridSearchCV round.
-        for i in range(cv_outer):
-            best_param.append(scores['estimator'][i].best_params_['metric'])
+    # Extracting information how many times each metric was used during each GridSearchCV round.
+    for i in range(cv_outer):
+        best_param.append(scores['estimator'][i].best_params_['metric'])
 
-        euclidean_distance.append(best_param.count('euclidean'))
-        manhattan_distance.append(best_param.count('manhattan'))
-        '''
+    euclidean_distance.append(best_param.count('euclidean'))
+    manhattan_distance.append(best_param.count('manhattan'))
+'''
