@@ -283,7 +283,7 @@ for k in neighbors:
 ```
 And here is model evaluation for several tested k-neighbors
 
-<img src="images/classification_KNN_evaluation.png" width="550" height="400">
+<img src="images/classification_KNN_evaluation.png" width="481.25" height="350">
 
 
 
