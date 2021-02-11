@@ -60,7 +60,7 @@ I analyzed several parameters of yeast genes such as relation between bases cont
 * Exploratory analysis
 * Regression model
 * Classification model
-* Python and its libriaries: scikit-learn, biopython, pandas, numpy, matplotlib, seaborn, scipy
+* Python libraries: scikit-learn, biopython, pandas, numpy, matplotlib, seaborn, scipy
 * Statistics: chi-squared test
 
 ## 3) Data colletion
