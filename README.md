@@ -285,5 +285,17 @@ And here is model evaluation for several tested k-neighbors
 
 <img src="images/classification_KNN_evaluation.png" width="412.5" height="300">
 
+Model evaluation, as expected, is not encouraging. The highest recall was 0.2 for k-neighbor = 1, which means that we were able to detect only 20% of all essential genes. The more neighbors in the algorithm, the recall was lower. Moreover, the recall of negative class is inversly correlated with recall. That indicates that the model acts randomly instead of recognizing essential and non-essential genes.
 
+We can also see which distance metrics (euclidean or manhattan) was selected during model tuning.
+
+<img src="images/classification_KNN_distance_metrics.png" width="435" height="300">
+
+For most of the degrees, manhattan distance metric was choosen in most of the cases during GridSearch cross-validation rounds, except for the K = 5, where euclidean distance was prefered.
+
+Since k-nearest neighbor algorithm was not successful, let's give it a try to random forest classifier. Performance with different number of trees in the forest will be evaluated using recall and recall of negative class metrics. The code for model using random forest algorithm was adapted from the k-nearest neighbor based algorithm. Let's see its evaluation.
+
+<img src="images/classification_RF_evaluation.png" width="412.5" height="300">
+
+Similarly as for the k-nearest neighbor algorithm - recall and negative class recall are inversly correlated. This suggest random acting of the model instead of recognizing essential and non-essential genes
 
