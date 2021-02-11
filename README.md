@@ -281,3 +281,9 @@ for k in neighbors:
     euclidean_distance.append(best_param.count('euclidean'))
     manhattan_distance.append(best_param.count('manhattan'))
 ```
+And here is model evaluation for several tested k-neighbors
+
+<img src="images/classification_KNN_evaluation.png" width="550" height="400">
+
+
+
