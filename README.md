@@ -299,3 +299,10 @@ Since k-nearest neighbor algorithm was not successful, let's give it a try to ra
 
 Similarly as for the k-nearest neighbor algorithm - recall and negative class recall are inversly correlated. This suggest random acting of the model instead of recognizing essential and non-essential genes
 
+## 5) Conclusions
+
+* Data exploration part brought some interesting findings about relation between gene lengths and GC contents. There is no clear corelation between these two parameters but it's visible that longer genes tend to have lower GC content and vice versa, and these differences are statistically significant. Moreover, this unequal distributions are even greater when looking on essential genes. A fraction of genes located in a quarter grouping genes with length above the median and GC content below the median is enriched for essential genes comparing for all the genes, and again this enrichement is statistically significant. These findings seem quite intriguing and perhapse it maybe will be publishible in a scientific journal. When having more free time, I'm going to do some research on this topic and if any articles touching these areas are available.
+
+* Regression model turned out to have very poor performance. R2 score was 0.12. From practical point of view, it shows no usefulness, however from basic science research perspective it is interesting because it shows a very weak correlation between parameters that do not seem to be related.
+
+* Classification of essential and non-essential genes using machine learning models was unsuccessful. I tested k-nn and random forest algorithm and both seem to label gens randomnly instead of finding features characteristic for both groups (because probably there are no features which would anable to unambiguously differentiate them...). Models with higher recall (which is still only 0.2) had lower specificity (recall of a negative class). This means that higher recall values are a result of more frequent, yet random, labeling genes as essential.
