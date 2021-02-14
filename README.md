@@ -204,7 +204,7 @@ Ok, let's start classification. I plan to predict whether a gene is essential or
 
 - I would like to see how the model performs for various k-neighbors. For that, I create outer loop which will test every indicated k-neighbor.
 
-- optimal distance metric (euclidean or manhattan) as well as model evaluation will be done by nested cross-validation. GridSearchCV (distance metric parameter tuning) and cross_validate (model evaluation) functions will be used for nested cross-validation. I would like also to see how many times a particular distance metric will be choosen during each round of GridSearch cross-validation.
+- optimal distance metric (euclidean or manhattan) as well as model evaluation will be done by nested cross-validation. GridSearchCV (distance metric parameter tuning) and cross_validate (model evaluation) functions will be used for nested cross-validation. I would like also to see how many times a particular distance metric will be chosen during each round of GridSearch cross-validation.
 
 - for distance metric selection, recall will be used as evaluation metric. Recall (sensitivity) tells how good is the model in detecting positive class (in our case - essential genes) in a dataset, which is crucial feature in this task - we want to detects as many essential genes as possible. Therefore, recall seems the most important evaluation metric is this aspect.
 
@@ -287,22 +287,22 @@ And here is the model evaluation for several tested k-neighbors:
 
 Model evaluation, as expected, is not encouraging. The highest recall was 0.2 for k-neighbor = 1, which means that we were able to detect only 20% of all essential genes. The more neighbors in the algorithm, the recall was lower. Moreover, recall is inversely correlated with recall of the negative class. That indicates that the model acts randomly instead of recognizing essential and non-essential genes.
 
-We can also see which distance metrics (euclidean or manhattan) was selected during model tuning.
+We can also see which distance metric (euclidean or manhattan) was selected during model tuning.
 
 <img src="images/classification_KNN_distance_metrics.png" width="435" height="300">
 
-For most of the degrees, manhattan distance metric was choosen in most of the cases during GridSearch cross-validation rounds, except for the K = 5, where euclidean distance was prefered.
+For most of the degrees, manhattan distance metric was chosen in most of the cases during GridSearch cross-validation rounds, except for the K = 5, where euclidean distance was prefered.
 
-Since k-nearest neighbor algorithm was not successful, let's give it a try to random forest classifier. Performance with different number of trees in the forest will be evaluated using recall and recall of negative class metrics. The code for model using random forest algorithm was adapted from the k-nearest neighbor based algorithm. Let's see its evaluation.
+Since k-nearest neighbor algorithm was not successful, let's give it a try to random forest classifier. Performance with different number of trees in the forest will be evaluated using recall and recall of a negative class metrics. The code for model using random forest algorithm was adapted from the k-nearest neighbor based algorithm. Let's see its evaluation.
 
 <img src="images/classification_RF_evaluation.png" width="412.5" height="300">
 
-Similarly as for the k-nearest neighbor algorithm - recall and negative class recall are inversly correlated. This suggest random acting of the model instead of recognizing essential and non-essential genes
+Similarly as for the k-nearest neighbor algorithm - recall and negative class recall are inversely correlated. This suggest random acting of the model instead of recognizing essential and non-essential genes
 
 ## 5) Conclusions
 
-* Data exploration part brought some interesting findings about relation between gene lengths and GC contents. There is no clear corelation between these two parameters but it's visible that longer genes tend to have lower GC content and vice versa, and these differences are statistically significant. Moreover, this unequal distributions are even greater when looking on essential genes. A fraction of genes located in a quarter grouping genes with length above the median and GC content below the median is enriched for essential genes comparing for all the genes, and again this enrichement is statistically significant. These findings seem quite intriguing and perhapse it maybe will be publishible in a scientific journal. When having more free time, I'm going to do some research on this topic and if any articles touching these areas are available.
+* Data exploration part brought some interesting findings about relation between gene lengths and GC contents. There is no clear correlation between these two parameters but it's visible that longer genes tend to have lower GC content and vice versa, and these differences are statistically significant. Moreover, this unequal distributions are even greater when looking on essential genes. A fraction of genes located in a quarter grouping genes with length above the median and GC content below the median is enriched for essential genes comparing with all the genes, and again this enrichment is statistically significant. These findings seem quite intriguing and perhaps it could be published in a scientific journal. When having more free time, I'm going to do some research on this topic and if any articles touching these areas are available.
 
-* Regression model turned out to have very poor performance. R2 score was 0.12. From practical point of view, it shows no usefulness, however from basic science research perspective it is interesting because it shows a very weak correlation between parameters that do not seem to be related.
+* Regression model turned out to have very poor performance. R2 score was equal to 0.12. From practical point of view, it shows no usefulness, however from basic science research perspective it is interesting because it shows a very weak correlation between parameters that do not seem to be related.
 
-* Classification of essential and non-essential genes using machine learning models was unsuccessful. I tested k-nn and random forest algorithm and both seem to label gens randomnly instead of finding features characteristic for both groups (because probably there are no features which would anable to unambiguously differentiate them...). Models with higher recall (which is still only 0.2) had lower specificity (recall of a negative class). This means that higher recall values are a result of more frequent, yet random, labeling genes as essential.
+* Classification of essential and non-essential genes using machine learning models was unsuccessful. I tested k-nn and random forest algorithm and both seem to label genes randomly instead of finding features characteristic for both groups (because probably there are no features which would enable to unambiguously differentiate them...). Models with higher recall (which is still only 0.2) had lower specificity (recall of a negative class). This means that higher recall values are a result of more frequent, yet random, labeling genes as essential.
