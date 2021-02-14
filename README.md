@@ -188,29 +188,29 @@ The fact that models performance changes depending on the polynomial degree mean
 
 ### Classification model
 
-As a class to be predicted I selected whether or not a gene is essential. A gene is essential, when yeast is not viable at all when the gene is removed. Around 20% of yeast genes are essential. I labeled genes as essential or not in our data frame using data from essential_genes.txt and non_essential_genes.txt files. Before starting building a classification model, I play a bit with data and want to see how essential genes are distributed. I adapt a previously used scatter plot to show what is GC content - gene length relation among essential and non-essential genes.
+I am going to build a model which predicts whether or not a genes is essential. A gene is essential, when yeast is not viable when this gene is inactivated. Around 20% of yeast genes are essential. I labeled genes as essential or not in our data frame using data from essential_genes.txt and non_essential_genes.txt files. Before building a classification model, I play a bit with data and want to see how essential genes are distributed. I adapt a previously used scatter plot to show what is the GC content - gene length relation for essential and non-essential genes.
 
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
-General pattern visible on the scatterplots is similar for essential and non-essential genes. However, while percentage shares of genes in each quarter for non-essential genes are comparable with values for all the genes in the previous scatterplot (differences around 1 percentage point), higher differences are observed for essential genes, especially for the quarter where genes with GC content below the median and length above the median. 36.15% of all essential genes are localised in this quarter, while for all investigated genes it was 28.44%. One should expect higher deviations in smaller datasets, but it still looks like a high enrichement. I analyse observed values with chi-squared test to see if differences in genes distributions among quarters are statistically significant.
+General pattern visible on the scatterplots is similar for essential and non-essential genes. However, while percentage shares of genes in each quarter for non-essential genes are comparable with values for all the genes in the previous scatterplot (differences around 1 percentage point), higher differences are observed for essential genes, especially for the quarter where genes with GC content below the median and length above the median. 36.15% of all essential genes are localised in this quarter, while for all investigated genes it was 28.44%. One should expect higher deviations in smaller datasets, but it still looks like a high enrichment. I analyzed observed values with chi-squared test to see if differences in genes distributions among quarters are statistically significant.
 
 <img src="images/chi2_essential_nonessential.png" width="743,75" height="175">
 
-Very lov p-value (4,4 * 10<sup>-7</sup>) indicates that differences that distributions of essential and non-essential genes among quarters are significantly different.
+A very low p-value (4,4 * 10<sup>-7</sup>) indicates that differences that distributions of essential and non-essential genes among quarters are significantly different.
 
 Ok, let's start classification. I plan to predict whether a gene is essential or not based on its length, bases content and chromosome on which is localised. Here is the roadmap for the model: 
 
-- essential genes are not a separate cluster, therefore distinguishing them from non-essential genes by support vector machine or logistic regression seems a poor choice. However, as we see in the previos charts, there are areas in which essential genes appear more often. This gives some hopes for k-nearest neighbors algorithm, which classify records based on neighboring samples. This algorithm will be used then.
+- essential genes are not a separate cluster, therefore distinguishing them from non-essential genes by support vector machine or logistic regression seems a poor choice. However, as we see in the previous charts, there are areas in which essential genes appear more often. This gives some hopes for k-nearest neighbors algorithm, which classify records based on neighboring samples. This algorithm will be used then.
 
-- I would like to see how model performs for various k-neighbors. For that, I create outer loop which will test every indicated k-neighbor.
+- I would like to see how the model performs for various k-neighbors. For that, I create outer loop which will test every indicated k-neighbor.
 
-- optmal distance metric (euclidean or manhattan) as well as model evaluation will be done by nested cross-validation. GridSearchCV (distance metric parameter tuning) and cross_validate (model evaluation) functions will be used for nested cross-validation. I would like also to see how many times a particurlar distance metric will be choosen during each round of GridSearch cross-validation.
+- optimal distance metric (euclidean or manhattan) as well as model evaluation will be done by nested cross-validation. GridSearchCV (distance metric parameter tuning) and cross_validate (model evaluation) functions will be used for nested cross-validation. I would like also to see how many times a particular distance metric will be choosen during each round of GridSearch cross-validation.
 
-- for distance metric selection, recall will be used as evaluation metric. Recall (sensitivity) tells how good is the model in detectng positive class (in our case - essential genes) in a dataset, which is crucial feature in this task - we want to detects as many essential genes as possible. Therefore, recall seems the most important evaluation metric is this aspect.
+- for distance metric selection, recall will be used as evaluation metric. Recall (sensitivity) tells how good is the model in detecting positive class (in our case - essential genes) in a dataset, which is crucial feature in this task - we want to detects as many essential genes as possible. Therefore, recall seems the most important evaluation metric is this aspect.
 
-- for evaluation on the test set, I will again use recall. However, a high recall value could be caused not by model ability to recognize essential genes, but by a tendency to label as many genes as possible as essential. This will result in many false positives, because many non-essential genes will be labeles as essential. To control if model is not biased in this manner, I would like to see in model evaluation also recall of a negative class (or specificity), which will tell us how good is the model in finding negative classes.
+- for evaluation on the test set, I will again use recall. However, high recall values could be caused not by the model ability to recognize essential genes, but by a tendency to random labelling more genes as essential. This will result in many false positives, because many non-essential genes will be labeled as essential. To control if model is not flawed in this manner, I would like to see in model evaluation also recall of a negative class (or specificity), which will tell us how good is the model in finding negative classes.
 
-- since there is no default metric allowing us to see  recall of a negative class, I create the recall_neg_class function which will extract required data for calculating recall of a negative class from confusion matrix.
+- since there is no default metric allowing us to see the recall of a negative class, I create the recall_neg_class function which will extract required data for calculating recall of a negative class from confusion matrix.
 
 And here is the code:
 
@@ -281,11 +281,11 @@ for k in neighbors:
     euclidean_distance.append(best_param.count('euclidean'))
     manhattan_distance.append(best_param.count('manhattan'))
 ```
-And here is model evaluation for several tested k-neighbors
+And here is the model evaluation for several tested k-neighbors:
 
 <img src="images/classification_KNN_evaluation.png" width="412.5" height="300">
 
-Model evaluation, as expected, is not encouraging. The highest recall was 0.2 for k-neighbor = 1, which means that we were able to detect only 20% of all essential genes. The more neighbors in the algorithm, the recall was lower. Moreover, the recall of negative class is inversly correlated with recall. That indicates that the model acts randomly instead of recognizing essential and non-essential genes.
+Model evaluation, as expected, is not encouraging. The highest recall was 0.2 for k-neighbor = 1, which means that we were able to detect only 20% of all essential genes. The more neighbors in the algorithm, the recall was lower. Moreover, recall is inversely correlated with recall of the negative class. That indicates that the model acts randomly instead of recognizing essential and non-essential genes.
 
 We can also see which distance metrics (euclidean or manhattan) was selected during model tuning.
 
