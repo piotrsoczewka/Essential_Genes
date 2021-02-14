@@ -1,12 +1,12 @@
+Welcome to my project, in which I am going to analyse some yeast genomic data and try to build some machine learning models to predict some of the genes' features. However, because it could be browsered not only by biologists, but also by people without relevant background, I provide below a short explanation of genetics fundamentals. Many simplifications have been done, yet I hope the basics of genetics relevant for this project are adequately explained. So, without further ado, let's start.
+
 ## 1) Theoretical introduction
 
-Welcome to my project, in which I am going to analyse some yeast genomic data and try to build some machine learning models to predicts some of the genes' features. However, because it could be browsered not only by biologists, but also by people without relevant background, I provide below a short explanation of genetics fundamentals. Many simplifications have been done, yet I hope the basics of genetics relevant for this project are adequately explained. So, without further ado, let's start.
-
-Every living organism contains instructions allowing development and functioning of an individual. These instructions are encoded in DNA - a long, chain-like molecule consisting of two strands which forms a famous double helix structure. Each strand is a string of four different elements called bases. They are adenine (A), thymine (T), cytosine (C) and guanine (G) and order of these bases determines information about a living organism. Both strands in DNA molecule are complementary - a each base from one strand interacts with a respective base from the other strand. A interacts with T, and C interacts with G, and vice versa. I think that the below should be helpful to understand it. (Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en)
+Every living organism contains instructions allowing development and functioning of an individual. These instructions are encoded in the DNA - a long, chain-like molecule consisting of two strands which form a famous double helix structure. Each strand is a string of four different elements called bases. They are adenine (A), thymine (T), cytosine (C) and guanine (G) and order of these bases determines information about a living organism. Both strands in a DNA molecule are complementary, which means that each base from one strand interacts with a respective base from the other strand: A interacts with T, and C interacts with G, and vice versa. I think that the picture below should be helpful to understand it. (Credit: Sponk, Roland1952. Adapted. CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en)
 
 <img src="images/dna_complement.png" width="300" height="404.68">
 
-To undestand complementarity between DNA strands, you may also take a look on the syntax of my create_complementary_strand function, which creates a complementary DNA strand to a given DNA strand.
+Also, you may also take a look on the syntax of my create_complementary_strand function, which creates a complementary DNA strand to a given DNA strand. This ilustrates well the concept of DNA complementary.
 
 ```python
 def create_complementary_strand(your_strand):
@@ -40,22 +40,22 @@ Before we jump into data analysis and model building, a few more theoretical not
 
 * while bases sequence determines a living organisms features, it also determines DNA physico-chemical properties: G and C interaction between two strands is stronger than A and T interaction. This means that the more C and G a DNA molecule have, the more energy is required for strands separation to overcome interactions between complementary bases.
     
-* organisms  have several DNA molecules in each cell. For example, humans have 46 separate DNA molecules, 23 from each parent. Each of this molecule forms a chromosome - this characteristic X shape structure which is a condensed DNA form. One can also find other DNA molecules in living cells, such as mitochondrial chromosome. Yes, the powerplant of the cell has their own DNA!
+* organisms have several DNA molecules in each cell. For example, humans have 46 separate DNA molecules, 23 from each parent. Each of this molecule forms a chromosome - this characteristic X shape structure which is condensed DNA form. One can also find other DNA molecules in living cells, such as mitochondrial chromosome. Yes, the powerplant of the cell has their own DNA!
     
-* instructions encoded in DNA are not located on the whole DNA molecule but in fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand. See the picture below which may help you to visualise. (Credit: Thomas Splettstoesser. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/deed.en)
+* instructions encoded in DNA are not located in the whole DNA molecule but in its fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand. See the picture below which may help you to visualise. (Credit: Thomas Splettstoesser. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/deed.en)
 
 <img src="images/dna_gene.jpg" width="377.56" height="350">
 
 I hope that this short introduction would be helpful to understand what I present in this project.
 
-## 2) What was done
+## 2) What I did here
 
-Here, I alalyze genomic data from Saccharomyces cerevisiae yeast. This little organism is not only famous for its achievements in bread and beer making, but also in biological sciences where it serves as a model organism. It was the first eukaryotic organisms with known DNA sequence. Yeast is well characterised and much is known about its genetic. Moreover, I carried out my PhD research using yeast, therefore it was a natural choice of an organism for this project.
+Here, I analyzed genomic data from Saccharomyces cerevisiae yeast. This little organism is not only famous for its achievements in bread and beer making, but also in biological sciences where it serves as a model organism. It was the first eukaryotic organisms with known DNA sequence. Yeast is well characterised and much is known about its genetic. Moreover, I carried out my PhD research using yeast, therefore it was a natural choice of an organism for this project.
 
-I analyzed several parameters of yeast genes such as relation between bases contents, gene length and if any particular cluster are formed. Finally, I built two machine learning models for predicting a gene lenght and a predicting if a gene is essential for yeast cell survival or not.
+I analyzed several parameters of yeast genes such as relation between bases contents, gene length and if any particular cluster are formed. Finally, I built two machine learning models for predicting a gene length and predicting if a gene is essential for yeast cell survival or not.
 
 
-## 2) Techniques and tools used in the project
+## 3) Techniques and tools used in the project
 
 * Exploratory analysis
 * Regression model
@@ -63,28 +63,28 @@ I analyzed several parameters of yeast genes such as relation between bases cont
 * Python libraries: scikit-learn, biopython, pandas, numpy, matplotlib, seaborn, scipy
 * Statistics: chi-squared test
 
-## 3) Data colletion
+## 4) Data colletion
 
-Data origins from https://www.yeastgenome.org/. The main data file (orf_genomic.fasta) contains all yeast genes, together with their sequences and some basic information about them. Also, I used 2 other data files (essential_genes.txt, non_essential_genes.txt) that tells us which genes are essential for yeast cells survival, and which are not.
+Data origins from https://www.yeastgenome.org/. The main data file (orf_genomic.fasta) contains all yeast genes, together with their sequences and some basic information about them. Also, I used two other data files (essential_genes.txt, non_essential_genes.txt) that tells us which genes are essential for yeast cells survival, and which are not.
 
-## 4) Results
+## 5) Results
 
-Below, I present some of the results of the project. Check out jupiter notebook files for the full story.
+Below, I present the most relevant results of the project. Check out jupyter notebook files for the full story.
 
 ### Exploratory analysis
-Data will be imported from the orf_genomic.fasta file using SeqIO interface from Bio library. Data contains all yeast genes IDs, their sequences and at which chromosomes they are localised. I aim to create a dataframe containing: gene ID, gene length, chromosom and content of each bases. Also, I count summed contents of G and C bases - this parameter is interesting in genetics, because the higher summed GC content, the more energy is required to separate DNA strands.
+Data was imported from the orf_genomic.fasta file using SeqIO interface from Bio library. Data contains all yeast genes IDs, their sequences and at which chromosomes they are localized. I aim to create a pandas data frame containing: gene ID, gene length, chromosome number and content of each bases. Also, I count summed contents of G and C bases - this parameter is interesting in genetics, because the higher is GC content, the more energy is required to separate DNA strands.
 
 <img src="images/all_genes.png" width="650" height="156.47">
 
-The data frame looks fine. Let's do some histogram to look for distribution of some of the genes features.
+The data frame looks fine. Let's do some histograms to look for distribution of some of the genes features.
 
 <img src="images/gene_length.png" width="650" height="325">
 
-Gene lengths ranges up to approx. 15000 base pairs, however only few of them are longer than 5000. Most of them have length of around 500-2000 base pairs.
+Gene lengths range up to approx. 15000 base pairs, however only few of them are longer than 5000. Most of them have length of around 500-2000 base pairs.
 
 <img src="images/bases_distributions.png" width="650" height="325">
 
-The charts shows that adenine content is the highest in yeast genes (most between 25% and 40%). The lowest is guanine (most between 15%-25%).
+The charts shows that adenine content is the highest in yeast genes (most between 25% and 40%). The lowest is cytosine (most between 15%-25%).
 
 <img src="images/GC_distribution.png" width="650" height="325">
 
@@ -94,29 +94,29 @@ Basic histograms look fine. In this section, I'd like also to take a look if the
 
 <img src="images/GC_vs_gene_length.png" width="650" height="487.5">
 
-While there is no clear corelation between GC content and gene length and most of the genes are localized around the intersection point of both medians, an interesting phenomenon is visiible - longer genes (above 2000 bp) tend to have GC content lower than the median. There are not genes longer than 7000 bp with GC content above the median. Reverse tendency is observed for short genes - genes below gene length median tend to have higher GC content. Perhapse, it will be possible to create a ML model predicting GC content based on gene lenth (or vice versa), however the lack of obvious correlation implies that this kind of a model will rather not be very useful.
+While there is no clear correlation between GC content and gene length and most of the genes are localized around the intersection of both medians, an interesting phenomenon is visible - longer genes (above 2000 bp) tend to have GC content lower than the median. There are not genes longer than 7000 bp with GC content above the median. Reverse tendency is observed for short genes - genes below the gene length median tend to have higher GC content. Perhaps, it will be possible to create a ML model predicting gene length based on bases content, however the lack of obvious correlation implies that this model will rather not be very accurate.
 
 The differences in genes distribution in each quarter are rather low and differ for around 3.5 percentage points from expected 25%. However, for a dataset of this size, even such a low difference may indicate some phenomenon which is not explained by randomness. To check if observed differences could have some statistical significances, I perform a chi-squared test for one  using stats module of scipy library.
 
 <img src="images/chi2_gc_length.png" width="650" height="86.46">
 
-A very low p-value indicates that observed differences in contents in each quarter are statisticly significant. One can tell that that the longer a gene is, an expected GC content tend to be lower than the median, and vice versa - shorter genes tend to have higher GC content.
+A very low p-value (1,52 * 10<sup>-25</sup>) indicates that observed differences in contents in each quarter are statistically significant. One can tell that that the longer a gene is, an expected GC content tend to be lower than the median, and vice versa - shorter genes tend to have higher GC content.
 
 ### Regression model
 
-I try to build a regression model for predicting a gene length base on its bases contents and chromosom at which is localised. Here is a roadmap for building my model:
+I try to build a regression model for predicting a gene length base on its bases contents and chromosome at which is localised. Here is a roadmap for building my model:
 
-- polynomial regression model - good to check what degree of a polynomial will yield the best results, linear model may not be optimal.
+- polynomial regression model - it's good to check what degree of a polynomial will yield the best results, linear model may not be optimal.
 
-- nested cross-validation as a general good practice in model building. Inner loop done by GridSearchCV() function select optimal parameter (in our case a degree of a polynomial) for the model. Outer loop done by cross_validate() function results in more accurate model evaluation - testing model on several test sets prevents us from overestimating (or underestimating) model performance. To make sure that testing sets are not participating in model training, GridSearchCV() is used as an estimaor argument in cross_validate().
+- nested cross-validation as a general good practice in model building. Inner loop done by GridSearchCV() function select optimal parameter (in our case a degree of a polynomial) for the model. Outer loop done by cross_validate() function results in more accurate model evaluation - testing model on several test sets prevents us from overestimating (or underestimating) model performance. To make sure that testing sets are not participating in model training, GridSearchCV() is used as an estimator argument in cross_validate().
 
-- R2 score will be used in GridSearchCV() for selecting optimal degree for the model.
+- R2 score will be used in GridSearchCV() as a metric for selecting optimal degree for the model.
 
 - I want to know what is the best degree selected by GridSearchCV() during each split done by cross_validate() to see if there is a 'universal' optimal degree for various training sets. For that, I extract the optimal degree for each split by using .best_params_. Results will be stored in best_degrees list.
 
-- several metrics will be used: ean of R2 scores, root mean square errors and  median absolute errors and their standard deviations. This will give us more information about model performance.
+- several metrics will be used for model evaluation: mean of R2 scores, root mean square errors and median absolute errors and their standard deviations. These parameters will give us more information about model performance.
 
-Here is the code for the model building and its evaluation:
+Here is the code for the regression model and its evaluation:
 
 ```python
 # Preparing y and X datasets.
@@ -168,7 +168,7 @@ print('Mean median absolute error =', mae_mean, "+/-", mae_std)
 print('Selected optimal degrees:', best_degrees)
 ```
     
-Model performance was pathetic though...
+Model performance was very poor...
 
 <img src="images/regression_performance.png" width="500" height="89.57">
 
@@ -176,15 +176,15 @@ As predicted in data exploration part, my regression model predicting gene lengt
 
 The model evaluation is not encouraging, but it is still interesting that the R2 score, despite being very low, is above 0. One would expect that gene length, chromosome localization and bases contents are independent features, but here I show that there is a weak relationship between them. Another interesting finding is that median absolute error is much lover than root mean square error. This means that for some genes model performs much better, having a mistake below 568 bases for 50% of the genes, while for the whole dataset the average error is 1070 bases.
 
-The GridSearchCV() function, in each cross_validate() split, always selected 3 as the optimal degree. I still want to see how model performs for other degrees. I create a loop in which a desired number of degrees will be tested and later metrics (R2 score, root mean square error, median absolute error)  will be shown for each degree. A single cross-validation will be performed since we want metrics for each degree. Because data sets are splited the same way during each round of cross-validation, degrees will be tested on the same datasets. Below I present results of evaluations of model with various polynomial degrees.
+The GridSearchCV() function, in each cross_validate() split, always selected 3 as the optimal degree. I still want to see how model performs for other degrees. I create a loop in which a desired number of degrees will be tested and evaluation metrics (R2 score, root mean square error, median absolute error)  will be shown for each degree. A single cross-validation will be performed since we want metrics for each degree. Because data sets are splited the same way during each round of cross-validation, degrees will be tested on the same datasets. Below I present results of evaluations of model with various polynomial degrees.
 
 <img src="images/regression_evaluation.png" width="400" height="800">
 
-The chart shows that 3 indeed seems to be optimal degree - not only R2 score is the highers, the erros for other metrics are the lowest.
+The chart shows that 3 indeed seems to be optimal degree - not only R2 score is the highest, the errors for other metrics are the lowest.
 
-I played a bit with higher degrees, however above the 4th model become very unstable (huge standard deviations) and difference between 1sth and 4th degrees are not visible on the chart, so I leave charts up to the 4th degree only.
+I played a bit with higher degrees, however above the 4th degree the model becomes very unstable (huge standard deviations) and difference between 1sth and 4th degrees are not visible on the chart, so I leave charts up to the 4th degree only.
 
-The fact that models performance changes depending on the polynomial degree means that gene lenghts predictions are not completely random, yet poor evaluation metrics indicate no practical application for this model.
+The fact that models performance changes depending on the polynomial degree means that gene lengths predictions are not completely random, yet poor evaluation metrics indicate no practical application for this model.
 
 ### Classification model
 
