@@ -299,7 +299,7 @@ Since k-nearest neighbor algorithm was not successful, let's give it a try to ra
 
 Similarly as for the k-nearest neighbor algorithm - recall and negative class recall are inversely correlated. This suggest random acting of the model instead of recognizing essential and non-essential genes.
 
-## 5) Conclusions
+## 6) Conclusions
 
 * Data exploration part brought some interesting findings about relation between gene lengths and GC contents. There is no clear correlation between these two parameters but it's visible that longer genes tend to have lower GC content and vice versa, and these differences are statistically significant. Moreover, this unequal distributions are even greater when looking on essential genes. A fraction of genes located in a quarter grouping genes with length above the median and GC content below the median is enriched for essential genes comparing with all the genes, and again this enrichment is statistically significant. These findings seem quite intriguing and perhaps it could be published in a scientific journal. When having more free time, I'm going to do some research on this topic and if any articles touching these areas are available.
 
