@@ -1,4 +1,4 @@
-Welcome to my project, in which I am going to analyse some yeast genomic data and try to build some machine learning models to predict some of the genes' features. However, because it could be browsered not only by biologists, but also by people without relevant background, I provide below a short explanation of genetics fundamentals. Many simplifications have been done, yet I hope the basics of genetics relevant for this project are adequately explained. So, without further ado, let's start.
+Welcome to my project, in which I am going to analyze some yeast genomic data and try to build some machine learning models to predict some of the genes' features. However, because it could be browsed not only by biologists, but also by people without relevant background, I provide below a short explanation of genetics fundamentals. Many simplifications have been done, yet I hope the basics of genetics relevant for this project are adequately explained. So, without further ado, let's start.
 
 ## 1) Theoretical introduction
 
@@ -38,11 +38,11 @@ def create_complementary_strand(your_strand):
 
 Before we jump into data analysis and model building, a few more theoretical notes:
 
-* while bases sequence determines a living organisms features, it also determines DNA physico-chemical properties: G and C interaction between two strands is stronger than A and T interaction. This means that the more C and G a DNA molecule have, the more energy is required for strands separation to overcome interactions between complementary bases.
+* while bases sequence determines a living organisms features, it also determines DNA physicochemical properties: G and C interaction between two strands is stronger than A and T interaction. This means that the more C and G a DNA molecule have, the more energy is required for strands separation to overcome interactions between complementary bases.
     
 * organisms have several DNA molecules in each cell. For example, humans have 46 separate DNA molecules, 23 from each parent. Each of this molecule forms a chromosome - this characteristic X shape structure which is condensed DNA form. One can also find other DNA molecules in living cells, such as mitochondrial chromosome. Yes, the powerplant of the cell has their own DNA!
     
-* instructions encoded in DNA are not located in the whole DNA molecule but in its fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its onw size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand. See the picture below which may help you to visualise. (Credit: Thomas Splettstoesser. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/deed.en)
+* instructions encoded in DNA are not located in the whole DNA molecule but in its fragments called genes. The analogy here could be a file saved on a hard drive - like a file takes only some of the available space on a hard drive, a gene occupies only a fragment of the whole DNA strand of a particular sequence. Like a file has its own size, a gene has its own length. And like there could be many files on a hard drive, there could be many genes on a single DNA strand. See the picture below which may help you to visualize. (Credit: Thomas Splettstoesser. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/deed.en)
 
 <img src="images/dna_gene.jpg" width="377.56" height="350">
 
@@ -50,7 +50,7 @@ I hope that this short introduction would be helpful to understand what I presen
 
 ## 2) What I did here
 
-Here, I analyzed genomic data from Saccharomyces cerevisiae yeast. This little organism is not only famous for its achievements in bread and beer making, but also in biological sciences where it serves as a model organism. It was the first eukaryotic organisms with known DNA sequence. Yeast is well characterised and much is known about its genetic. Moreover, I carried out my PhD research using yeast, therefore it was a natural choice of an organism for this project.
+Here, I analyzed genomic data from Saccharomyces cerevisiae yeast. This little organism is not only famous for its achievements in bread and beer making, but also in biological sciences where it serves as a model organism. It was the first eukaryotic organisms with known DNA sequence. Yeast is well characterized and much is known about its genetic. Moreover, I carried out my PhD research using yeast, therefore it was a natural choice of an organism for this project.
 
 I analyzed several parameters of yeast genes such as relation between bases contents, gene length and if any particular cluster are formed. Finally, I built two machine learning models for predicting a gene length and predicting if a gene is essential for yeast cell survival or not.
 
@@ -104,7 +104,7 @@ A very low p-value (1,52 * 10<sup>-25</sup>) indicates that observed differences
 
 ### Regression model
 
-I try to build a regression model for predicting a gene length base on its bases contents and chromosome at which is localised. Here is a roadmap for building my model:
+I try to build a regression model for predicting a gene length base on its bases contents and chromosome at which is localized. Here is a roadmap for building my model:
 
 - polynomial regression model - it's good to check what degree of a polynomial will yield the best results, linear model may not be optimal.
 
@@ -174,9 +174,9 @@ Model performance was very poor...
 
 As predicted in data exploration part, my regression model predicting gene length is useless. Standard deviations for each metrics are rather low, which shows that model performs comparably in various tests sets. In each split in outer loop the most optimal degree for model functioning is 3. 
 
-The model evaluation is not encouraging, but it is still interesting that the R2 score, despite being very low, is above 0. One would expect that gene length, chromosome localization and bases contents are independent features, but here I show that there is a weak relationship between them. Another interesting finding is that median absolute error is much lover than root mean square error. This means that for some genes model performs much better, having a mistake below 568 bases for 50% of the genes, while for the whole dataset the average error is 1070 bases.
+The model evaluation is not encouraging, but it is still interesting that the R2 score, despite being very low, is above 0. One would expect that gene length, chromosome localization and bases contents are independent features, but here I show that there is a weak relationship between them. Another interesting finding is that median absolute error is much lower than root mean square error. This means that for some genes model performs much better, having a mistake below 568 bases for 50% of the genes, while for the whole dataset the average error is 1070 bases.
 
-The GridSearchCV() function, in each cross_validate() split, always selected 3 as the optimal degree. I still want to see how model performs for other degrees. I create a loop in which a desired number of degrees will be tested and evaluation metrics (R2 score, root mean square error, median absolute error)  will be shown for each degree. A single cross-validation will be performed since we want metrics for each degree. Because data sets are splited the same way during each round of cross-validation, degrees will be tested on the same datasets. Below I present results of evaluations of model with various polynomial degrees.
+The GridSearchCV() function, in each cross_validate() split, always selected 3 as the optimal degree. I still want to see how model performs for other degrees. I create a loop in which a desired number of degrees will be tested and evaluation metrics (R2 score, root mean square error, median absolute error)  will be shown for each degree. A single cross-validation will be performed since we want metrics for each degree. Because data sets are split the same way during each round of cross-validation, degrees will be tested on the same datasets. Below I present results of evaluations of model with various polynomial degrees.
 
 <img src="images/regression_evaluation.png" width="400" height="800">
 
@@ -192,13 +192,13 @@ I am going to build a model which predicts whether or not a genes is essential. 
 
 <img src="images/essential_vs_nonessential.png" width="650" height="1056.25">
 
-General pattern visible on the scatterplots is similar for essential and non-essential genes. However, while percentage shares of genes in each quarter for non-essential genes are comparable with values for all the genes in the previous scatterplot (differences around 1 percentage point), higher differences are observed for essential genes, especially for the quarter where genes with GC content below the median and length above the median. 36.15% of all essential genes are localised in this quarter, while for all investigated genes it was 28.44%. One should expect higher deviations in smaller datasets, but it still looks like a high enrichment. I analyzed observed values with chi-squared test to see if differences in genes distributions among quarters are statistically significant.
+General pattern visible on the scatterplots is similar for essential and non-essential genes. However, while percentage shares of genes in each quarter for non-essential genes are comparable with values for all the genes in the previous scatterplot (differences around 1 percentage point), higher differences are observed for essential genes, especially for the quarter where genes with GC content below the median and length above the median. 36.15% of all essential genes are localized in this quarter, while for all investigated genes it was 28.44%. One should expect higher deviations in smaller datasets, but it still looks like a high enrichment. I analyzed observed values with chi-squared test to see if differences in genes distributions among quarters are statistically significant.
 
 <img src="images/chi2_essential_nonessential.png" width="743,75" height="175">
 
 A very low p-value (4,4 * 10<sup>-7</sup>) indicates that differences that distributions of essential and non-essential genes among quarters are significantly different.
 
-Ok, let's start classification. I plan to predict whether a gene is essential or not based on its length, bases content and chromosome on which is localised. Here is the roadmap for the model: 
+Ok, let's start classification. I plan to predict whether a gene is essential or not based on its length, bases content and chromosome on which is localized. Here is the roadmap for the model: 
 
 - essential genes are not a separate cluster, therefore distinguishing them from non-essential genes by support vector machine or logistic regression seems a poor choice. However, as we see in the previous charts, there are areas in which essential genes appear more often. This gives some hopes for k-nearest neighbors algorithm, which classify records based on neighboring samples. This algorithm will be used then.
 
@@ -291,13 +291,13 @@ We can also see which distance metric (euclidean or manhattan) was selected duri
 
 <img src="images/classification_KNN_distance_metrics.png" width="435" height="300">
 
-For most of the degrees, manhattan distance metric was chosen in most of the cases during GridSearch cross-validation rounds, except for the K = 5, where euclidean distance was prefered.
+For most of the degrees, manhattan distance metric was chosen in most of the cases during GridSearch cross-validation rounds, except for the K = 5, where euclidean distance was preferred.
 
 Since k-nearest neighbor algorithm was not successful, let's give it a try to random forest classifier. Performance with different number of trees in the forest will be evaluated using recall and recall of a negative class metrics. The code for model using random forest algorithm was adapted from the k-nearest neighbor based algorithm. Let's see its evaluation.
 
 <img src="images/classification_RF_evaluation.png" width="412.5" height="300">
 
-Similarly as for the k-nearest neighbor algorithm - recall and negative class recall are inversely correlated. This suggest random acting of the model instead of recognizing essential and non-essential genes
+Similarly as for the k-nearest neighbor algorithm - recall and negative class recall are inversely correlated. This suggest random acting of the model instead of recognizing essential and non-essential genes.
 
 ## 5) Conclusions
 
