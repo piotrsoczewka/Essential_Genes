@@ -80,7 +80,7 @@ The data frame looks fine. Let's do some histograms to look for distribution of 
 
 <img src="images/gene_length.png" width="650" height="325">
 
-Gene lengths range up to approx. 15000 base pairs, however only few of them are longer than 5000. Most of them have length of around 500-2000 base pairs.
+Gene lengths range up to approx. 15000 bases, however only few of them are longer than 5000. Most of them have length of around 500-2000 bases.
 
 <img src="images/bases_distributions.png" width="650" height="325">
 
